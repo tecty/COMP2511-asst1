@@ -179,12 +179,12 @@ public class Session {
 	
 	public String getPrint() {
 		// print the time
-		String str = this.getTitle()+"\n";
+		String str = this.getTitle();
 		// get the print info;
 		for (int i = 0; i < row_list.size(); i++) {
 			Row this_row = row_list.get(i);
 			// append the row info 
-			str += this_row.getName()+": ";
+			str += "\n"+this_row.getName()+": ";
 			
 			// a flag use for whether the string is printed of some ticket
 			int printed = 0;
@@ -205,12 +205,8 @@ public class Session {
 					printed = 1;
 				}
 			}
-			// print the new line for another row
-			str+= "\n";
-			
 			
 		}
-		
 		
 		return str;
 		
