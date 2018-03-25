@@ -39,10 +39,10 @@ public class Cinema {
 	}
 
 	public Session get_session(String session_time) throws RejectExcption {
-		System.out.println("session size "+ session_list.size()+" input time("+session_time+")");
+//		System.out.println("session size "+ session_list.size()+" input time("+session_time+")");
 		for (int i = 0; i < session_list.size(); i++) {
 			if(session_time.equals(session_list.get(i).getTime()) ) {
-				System.out.println("got the required session");
+//				System.out.println("got the required session");
 				return session_list.get(i);
 			}
 		}

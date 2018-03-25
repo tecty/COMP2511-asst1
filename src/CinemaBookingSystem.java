@@ -37,7 +37,7 @@ public class CinemaBookingSystem {
 	        	// get the input by line 
 				String line = (String) sc.nextLine();
 				
-				System.out.println("ThisLine: "+ line );
+//				System.out.println("ThisLine: "+ line );
 				// split it as command array
 				String[] command = line.split(" ");
 				// read the command to call correspond function
@@ -154,23 +154,55 @@ public class CinemaBookingSystem {
 	}
 	
 	public static void changeTicket(int ticket_id, int cinema_id,  String time, int amount ) {
+		Session to_session;
+		try {
+			to_session = cinema_list.get(cinema_id-1).get_session(time);
+		} catch (RejectExcption e1) {
+			// reject the change  
+			System.out.println("Change rejected");
+			
+			return ;
+		}
+		
 		for (int i = 0; i < ticket_list.size(); i++) {
 			Ticket the_ticket = ticket_list.get(i);
 			if (the_ticket.getId() == ticket_id) {
-				try {
-					// remove this ticket in session 
-					the_ticket.getSession().change_ticket(ticket_id, amount);
-					// print the information of the ticket change
-					System.out.println("Change "+the_ticket.getPrint());
+				if (to_session == the_ticket.getSession()) {
+					// ticket change within a session
+					try {
+						to_session.change_ticket(ticket_id, amount);
+					} catch (RejectExcption e) {
+						// reject the change  
+						System.out.println("Change rejected");
+						
+						return ;
+					}
 					
-					// break the function
-					return ;
-				} catch (RejectExcption e) {
-					// reject the change  
-					System.out.println("Change rejected");
+				} else {
+					try {
+						// ticket change across a session
+						// try to book a new ticket for that session
+						Ticket new_ticket = to_session.book_ticket(ticket_id, amount);
+						// new ticket success, cancel the old ticket from original session
+						the_ticket.getSession().cancel_ticket(ticket_id);
+						// store the new_ticket into ticket list
+						ticket_list.add(i, new_ticket);
+						
+					} catch (RejectExcption e) {
+						// reject the change  
+						System.out.println("Change rejected");
+						
+						return ;
+					}
 					
-					return ;
+					
 				}
+				
+				// print the information of the ticket change
+				System.out.println("Change "+the_ticket.getPrint());
+				
+				// break the function
+				return ;
 			}
 		}
 	}
