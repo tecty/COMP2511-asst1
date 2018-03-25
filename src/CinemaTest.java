@@ -1,42 +1,71 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * 
- */
-
-/**
- * @author tecty
- *
- */
 class CinemaTest {
-
-	/**
-	 * Test method for {@link Cinema#Cinema(int)}.
-	 */
-	@Test
-	void testCinema() {
-		// create a Cinema 
-		Cinema cinema1 = new Cinema(1);
-		assertEquals(1, cinema1.getId());
+	private Cinema cinema;
+	@BeforeEach
+	void setUp() throws Exception {
+		this.cinema = new Cinema();
+	
 	}
 
-	/**
-	 * Test method for {@link Cinema#setRows(java.lang.String, int)}.
-	 * Test method for {@link Cinema#getRow(java.lang.String)}.
-	 */
 	@Test
-	void testGetRow() {
-		Cinema cinema1 = new Cinema(1);
-		cinema1.setRows("AA", 12);
+	void testCreate_row() {
+		// create two standard row
+		this.cinema.create_row("A", 10);
+		this.cinema.create_row("B", 12);
+		
+		// get the capacity from the cinema
 		try {
-			// try to get the aa row from cinema
-			assertEquals("AA", cinema1.getRow("AA").getRow());
-		} catch (Exception e) {
-			// TODO: handle exception
+			assertEquals(10, this.cinema.get_row("A").getCapacity() );
+			assertEquals(12, this.cinema.get_row("B").getCapacity() );
+		} catch (RejectExcption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 	}
 
-
+	@Test
+	void testCreate_session() {
+		// create two standard row
+		this.cinema.create_row("A", 10);
+		this.cinema.create_row("B", 12);
+		
+		// create a session on noon
+		this.cinema.create_session("12:20","Inception");
+		
+		// get the session on noon 
+		try {
+			Session the_session =  this.cinema.get_session("12:20");
+			
+			assertEquals("Inception", the_session.getTitle());
+			assertEquals("12:20", the_session.getTime());
+		} catch (RejectExcption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	@Test
+	void test_get_session() {
+		// create two standard row
+		this.cinema.create_row("A", 10);
+		this.cinema.create_row("B", 12);
+		
+		// create a session on noon
+		Session the_session =this.cinema.create_session("12:20","Inception");
+		
+		// get the session on noon 
+		try {
+			assertEquals(the_session, this.cinema.get_session("12:20"));
+		} catch (RejectExcption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
