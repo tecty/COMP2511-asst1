@@ -106,6 +106,46 @@ class SessionTest {
 		}
 	}
 
+	/**
+	 * Test method for {@link Session#change_ticket(int, int)}.
+	 */
+	@Test
+	void testChange_ticket_to_bigger_with_canceled_space() {
+		try {
+			assertEquals(1,session.book_ticket(1, 5).getId());
+			assertEquals(2, session.book_ticket(2, 4).getId());
+			assertEquals(3, session.book_ticket(3, 2).getId());
+			assertEquals(4, session.book_ticket(4, 2).getId());
+			
+			// cancel ticket 1
+			session.cancel_ticket(1);
+			session.cancel_ticket(3);
+			
+			
+			Ticket this_ticket = session.get_ticket_by_id(2);
+			assertEquals("B", this_ticket.getRow().getName());
+			assertEquals(1, this_ticket.getStart_no());
+			assertEquals(4, this_ticket.getEnd_no());
+			
+			
+			
+			
+			// ticket2 should be assigned to current row 
+			session.change_ticket(2, 5);
+			// the ticket change to B1-5 
+			assertEquals("B", this_ticket.getRow().getName());
+			assertEquals(1, this_ticket.getStart_no());
+			assertEquals(5, this_ticket.getEnd_no());
+			
+			// I can assign a new ticket in row A
+			assertEquals(2,session.book_ticket(2, 5).getId());
+
+			
+		} catch (RejectExcption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Test method for {@link Session#change_ticket(int, int)}.
@@ -198,6 +238,6 @@ class SessionTest {
 		}
 		assertEquals("Inception\n" + 
 				"A: 1-5\n" + 
-				"B: 1-5,6-10\n", session.getPrint());
+				"B: 1-5,6-10", session.getPrint());
 	}
 }

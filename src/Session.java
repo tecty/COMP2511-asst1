@@ -74,10 +74,32 @@ public class Session {
 		Ticket this_ticket = get_ticket_by_id(ticket_id);
 		if(this_ticket.get_amount() >= amount) {
 			// no need for reassign the location of end number
+			// because new require space is less than old ticket
 			this_ticket.setEnd_no(amount + this_ticket.getStart_no()-1);
 			// break the function
 			return ;
 		}
+		if (this_ticket.get_amount() < amount) {
+			// try to reassign the ticket with same row
+			for (int end_no = this_ticket.getEnd_no()+1;
+					end_no < this_ticket.getRow().getCapacity(); end_no++) {
+				
+				if (is_free(this_ticket.getRow(),end_no)) {
+					if (amount == end_no - this_ticket.getStart_no()+1) {
+						// get the require space, set the new end_no
+						this_ticket.setEnd_no(end_no);
+						
+						return ;
+					}
+					// else pass to test next end_no to test
+				}
+				else {
+					// the space in the row is not enough, need to assigned to new row.
+					break;
+				}
+			}
+		}
+		
 		
 		// cancel the ticket in the system
 		// so the system can reassign the location
