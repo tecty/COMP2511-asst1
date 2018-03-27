@@ -1,0 +1,15 @@
+Booking 1 A1-A5
+Booking 2 A6-A10
+Booking 3 A11-A15
+Booking 4 B1-B5
+A Very Long Movie Name That May Fail
+A: 1-5,6-10,11-15
+B: 1-5
+Change 2 A1-A5
+Inception
+A: 1-5
+B: 
+Change 2 A6-A10
+A Very Long Movie Name That May Fail
+A: 1-5,11-15,6-10
+B: 1-5

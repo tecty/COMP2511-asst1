@@ -1,0 +1,11 @@
+Booking 1 A1-A10
+Booking 2 B1-B12
+Booking rejected
+Booking 4 A1-A10
+Booking 5 A11-A14
+Booking 6 B1-B3
+Change 1 B1-B7
+Cancel 6
+Inception
+A: 1-10,11-14
+B: 1-7

@@ -37,9 +37,15 @@ public class CinemaBookingSystem {
 	        	// get the input by line 
 				String line = (String) sc.nextLine();
 				
+
+//				Test output
 //				System.out.println("ThisLine: "+ line );
+				
 				// split it as command array
 				String[] command = line.split(" ");
+				
+				// if the line is command, discard this 
+//				if(command[0] && command[0].charAt(0)=='#') continue;
 				// read the command to call correspond function
 				switch (command[0]) {
 				case "Cinema":
@@ -50,6 +56,19 @@ public class CinemaBookingSystem {
 							Integer.parseInt(command[3]));
 					break;
 				case "Session":
+					// correct the name input if the title include " "
+					if (command.length > 4) {
+						// more than we want is divided
+						for (int i = 4; i < command.length; i++) {
+							if (command[i].charAt(0)== '#') {
+								break;
+							}
+							
+							command[3] += " "+command[i];
+						}
+					}
+					
+					
 					// call the wrapper from this class
 					// add a session of specified cinema
 					addSession(Integer.parseInt(command[1]),
@@ -187,6 +206,9 @@ public class CinemaBookingSystem {
 						the_ticket.getSession().cancel_ticket(ticket_id);
 						// store the new_ticket into ticket list
 						ticket_list.add(i, new_ticket);
+						// print the new ticket, successfully remove the old ticket in the sys
+						the_ticket = new_ticket;
+						
 						
 					} catch (RejectExcption e) {
 						// reject the change  

@@ -1,0 +1,19 @@
+Cinema 1 A 15
+Cinema 1 B 20
+Cinema 2 B 5
+Cinema 2 X 5
+Session 1 09:00 A Very Long Movie Name That May Fail # this command should be discard
+
+# another command should be discard
+Session 1 14:30 Inception
+Session 2 09:00 Up
+Request 1 1 09:00 5
+Request 2 1 09:00 5
+Request 3 1 09:00 5
+Request 4 1 09:00 5
+Print 1 09:00
+
+Change 2 1 14:30 5 
+Print 1 14:30
+Change 2 1 09:00 5 
+Print 1 09:00

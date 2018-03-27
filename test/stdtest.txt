@@ -1,0 +1,16 @@
+Cinema 1 A 15
+Cinema 1 B 20
+Cinema 2 B 5
+Cinema 2 X 5
+Session 1 09:00 Toy Story
+Session 1 14:30 Inception
+Session 2 09:00 Up
+Request 1 1 09:00 10
+Request 2 1 09:00 12
+Request 3 1 09:00 10
+Request 4 1 14:30 10
+Request 5 1 14:30 4 
+Request 6 2 09:00 3
+Change 1 1 14:30 7
+Cancel 6
+Print 1 14:30

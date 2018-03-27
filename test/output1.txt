@@ -1,0 +1,18 @@
+Booking 1 A1-A5
+Booking 2 A6-A7
+Booking 3 A8-A10
+Booking 4 A11-A15
+Booking 5 B1-B5
+Toy Story
+A: 1-5,6-7,8-10,11-15
+B: 1-5
+Cancel 3
+Cancel 5
+Change 2 A6-A10
+Toy Story
+A: 1-5,6-10,11-15
+B: 
+Change 2 B1-B7
+Toy Story
+A: 1-5,11-15
+B: 1-7
